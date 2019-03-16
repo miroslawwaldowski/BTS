@@ -8,6 +8,7 @@ public class Bts {
 	public static int btsQuantity;
 	public static double btsRange;	//promien	
 	public static double x,y,minY,maxY;
+	public static int name;
 	
 	static List<BtsPoint> BtsList = new ArrayList<BtsPoint>();
 	static List<BtsEdge> EdgeList = new ArrayList<BtsEdge>();
@@ -22,9 +23,9 @@ public class Bts {
 			x =(Math.random()*2*citySize);			
 			minY=citySize-Math.sqrt((citySize*citySize)-((x-citySize)*(x-citySize)));
 			maxY=citySize+Math.sqrt((citySize*citySize)-((x-citySize)*(x-citySize)));
-			y = minY + (Math.random() * ((maxY - minY) + 1));
-			
-			BtsPoint point = new BtsPoint(x, y);
+			y = minY + (Math.random() * ((maxY - minY)));
+			name = i+1;
+			BtsPoint point = new BtsPoint(x, y,name);
 			BtsList.add(point);
 		}
 		
@@ -32,12 +33,10 @@ public class Bts {
 			for (int k=i+1;k<BtsList.size();k++) {
 				double distance = Math.sqrt( Math.pow((BtsList.get(i).getX()-BtsList.get(k).getX()), 2) + Math.pow((BtsList.get(i).getY()-BtsList.get(k).getY()), 2));
 
-				if (distance<(2*btsRange)){
-					
+				if (distance<=(2*btsRange)){
 					BtsEdge edge = new BtsEdge(BtsList.get(i), BtsList.get(k));
 					EdgeList.add(edge);
-				}
-				
+				}			
 			}
 		}
 		System.out.println(BtsList.size());	
@@ -45,7 +44,7 @@ public class Bts {
 	}
 	
 	public static void main(String[] args) {
-		
+
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {

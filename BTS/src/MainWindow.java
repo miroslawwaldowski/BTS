@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
@@ -28,6 +30,10 @@ public class MainWindow extends JFrame {
     
 	public MainWindow() {
 
+		Translator.translator();
+
+		
+		
 		this.setSize(WIDTH,HEIGHT);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
@@ -38,14 +44,15 @@ public class MainWindow extends JFrame {
 		
 		buttonGenerator = new JButton("Generuj"); 
 		buttonSave = new JButton("Zapisz");
-		citySizeLabel = new JLabel("Wielkosc miasta");
+		citySizeLabel = new JLabel("Promien miasta");
 		btsQuantityLabel = new JLabel("Ilosc BTS");
-		btsRangeLabel = new JLabel("Zasieg BTS");
+		btsRangeLabel = new JLabel("Promien BTS");
 		citySizeTextField = new JTextField(5);
 		btsQuantityTextField = new JTextField(5);
 		btsRangeTextField = new JTextField(5);
 
 		buttonGenerator.addActionListener(new buttonListener());
+		buttonSave.addActionListener(new buttonListener());
 		citySizeTextField.addKeyListener(new DoubleNumbersKeyListener());
 		btsQuantityTextField.addKeyListener(new IntegerNumbersKeyListener());
 		btsRangeTextField.addKeyListener(new DoubleNumbersKeyListener());
@@ -90,6 +97,27 @@ public class MainWindow extends JFrame {
 				System.out.println(x+" "+z+" "+y);
 				Bts.calculation();
 				repaint();
+			} else if(e.getSource() == buttonSave){
+				
+				JFileChooser chooser = new JFileChooser();
+	
+				
+				
+				
+			    FileNameExtensionFilter GXLfilter = new FileNameExtensionFilter(
+			        "GXL (Graph eXchange Language)", "gxl");
+			    
+			    chooser.setFileFilter(GXLfilter);
+			    chooser.setAcceptAllFileFilterUsed(false);
+			    chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			    
+			    if(chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+			    			    	
+			    	System.out.println("Zapisz");
+			    	System.out.println("You chose to open this file: " +
+			            chooser.getSelectedFile().getName());
+			       
+			    }		
 			}
 		}
 	}
