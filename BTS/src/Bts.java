@@ -10,8 +10,8 @@ public class Bts {
 	public static double x,y,minY,maxY;
 	public static int name;
 	
-	static List<BtsPoint> BtsList = new ArrayList<BtsPoint>();
-	static List<BtsEdge> EdgeList = new ArrayList<BtsEdge>();
+	public static List<BtsPoint> BtsList = new ArrayList<BtsPoint>();
+	public static List<BtsEdge> EdgeList = new ArrayList<BtsEdge>();
 	
 	public static void calculation() {
 		

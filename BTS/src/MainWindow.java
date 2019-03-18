@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -13,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
@@ -100,22 +102,32 @@ public class MainWindow extends JFrame {
 			} else if(e.getSource() == buttonSave){
 				
 				JFileChooser chooser = new JFileChooser();
-	
-				
-				
-				
+
 			    FileNameExtensionFilter GXLfilter = new FileNameExtensionFilter(
 			        "GXL (Graph eXchange Language)", "gxl");
 			    
 			    chooser.setFileFilter(GXLfilter);
 			    chooser.setAcceptAllFileFilterUsed(false);
 			    chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			    chooser.setSelectedFile(new File(".gxl"));
 			    
-			    if(chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-			    			    	
-			    	System.out.println("Zapisz");
-			    	System.out.println("You chose to open this file: " +
-			            chooser.getSelectedFile().getName());
+			    File fileToSave;
+			    
+			    int x = chooser.showSaveDialog(null);
+			    
+			    System.out.println("x");
+			    if(x == JFileChooser.APPROVE_OPTION) {   	
+			    	System.out.println(JFileChooser.APPROVE_OPTION);
+			    	fileToSave = chooser.getSelectedFile();
+			    	
+			    	System.out.println(chooser.getSelectedFile());
+			    	System.out.println(fileToSave.getName());
+			    				    	
+
+			        if (!fileToSave.getName().toLowerCase().endsWith(".gxl")) {
+			        	fileToSave = new File(fileToSave.getParentFile(), fileToSave.getName() + ".gxl");
+			        }
+		        GxlCreator.writeGXL(fileToSave);
 			       
 			    }		
 			}
