@@ -6,14 +6,12 @@ import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
-
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 @SuppressWarnings("serial")
@@ -101,27 +99,13 @@ public class MainWindow extends JFrame {
 				repaint();
 			} else if(e.getSource() == buttonSave){
 				
-				JFileChooser chooser = new JFileChooser();
+				CustomFileChooser chooser = new CustomFileChooser();
+			    
+			    int x = chooser.showSaveDialog(MainWindow.this);
 
-			    FileNameExtensionFilter GXLfilter = new FileNameExtensionFilter(
-			        "GXL (Graph eXchange Language)", "gxl");
-			    
-			    chooser.setFileFilter(GXLfilter);
-			    chooser.setAcceptAllFileFilterUsed(false);
-			    chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			    chooser.setSelectedFile(new File(".gxl"));
-			    
-			    File fileToSave;
-			    
-			    int x = chooser.showSaveDialog(null);
-			    
-			    System.out.println("x");
 			    if(x == JFileChooser.APPROVE_OPTION) {   	
-			    	System.out.println(JFileChooser.APPROVE_OPTION);
-			    	fileToSave = chooser.getSelectedFile();
 			    	
-			    	System.out.println(chooser.getSelectedFile());
-			    	System.out.println(fileToSave.getName());
+			    File fileToSave = chooser.getSelectedFile();
 			    				    	
 
 			        if (!fileToSave.getName().toLowerCase().endsWith(".gxl")) {
