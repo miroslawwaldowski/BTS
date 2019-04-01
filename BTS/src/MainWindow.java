@@ -30,9 +30,7 @@ public class MainWindow extends JFrame {
     
 	public MainWindow() {
 
-		Translator.translator();
-
-		
+		Translator.translator();		
 		
 		this.setSize(WIDTH,HEIGHT);
 		this.setLocationRelativeTo(null);
@@ -77,6 +75,7 @@ public class MainWindow extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == buttonGenerator) {
+				
 				double x=0;
 				double y=0;
 				int z=0;
